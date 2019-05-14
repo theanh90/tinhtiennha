@@ -11,6 +11,11 @@ import UIKit
 let MONEY_PER_MONTH = 1200000
 let NUMBER_PERSON_HOST = 3 // Anh - Giang - Ngan
 
+enum SegmentTab {
+    case tabLeft
+    case tabRight
+}
+
 class ResultVC: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var titleLabel: UILabel!
@@ -41,6 +46,11 @@ class ResultVC: UIViewController {
     // MARK: - IBAction
     @IBAction func closeScreen(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func gotoTest(_ sender: Any) {
+        let viewC = SegmentAppointmentViewController()
+        self.navigationController?.pushViewController(viewC, animated: true)
     }
     
     // MARK: - Support method
