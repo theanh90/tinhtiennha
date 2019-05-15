@@ -23,4 +23,9 @@ class CalculatorMoneyModel: NSObject {
     var hoangAnhMemberCount: Int = 0
     var hoangAnhMoreMoney: Int = 0
     var hoangAnhNote: String?
+    
+    // air condition electric
+    var electricAirOld: Int = 0
+    var electricAirNew: Int = 0
+    var electricTotal: Int = 0
 }

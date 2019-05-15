@@ -27,6 +27,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var haNoteTextView: UITextView!
     @IBOutlet weak var commonNoteTextView: UITextView!
     
+    // new electric
+    @IBOutlet weak var electricAirConditionOldTextField: UITextField!
+    @IBOutlet weak var electricAirConditionNewTextField: UITextField!
+    @IBOutlet weak var electricTotalTextField: UITextField!
 
     // MARK: - Custom Properties
     let bag = DisposeBag()
@@ -56,6 +60,9 @@ class ViewController: UIViewController {
         param.hoangAnhMemberCount = Int(haMemberCountTextField.text!) ?? 0
         param.hoangAnhMoreMoney = Int(haMoreTextField.text!) ?? 0
         param.hoangAnhNote = haNoteTextView.text
+        param.electricAirOld = Int(electricAirConditionOldTextField.text!) ?? 0
+        param.electricAirNew = Int(electricAirConditionNewTextField.text!) ?? 0
+        param.electricTotal = Int(electricTotalTextField.text!) ?? 0
         
         var huongMore = Int(huongMoreTextField.text!) ?? 0
         if !huongMoreButton.isSelected {
