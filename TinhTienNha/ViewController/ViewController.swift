@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultVC")
             as! ResultVC
         let param = CalculatorMoneyModel()
-        param.electricMonth = Int(electricMonthTextField.text!) ?? 0
+        param.electricMonth = electricMonthTextField.text ?? ""
         param.houseMonth = Int(houseMonthTextField.text!) ?? 0
         param.networkMoney = Int(networkMoneyTextField.text!) ?? 0
         param.waterMoney = Int(waterMoneyTextField.text!) ?? 0
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         format.dateFormat = "M"
         let currentMonth = format.string(from: Date())
         houseMonthTextField.text = currentMonth
-        electricMonthTextField.text = "\(Int(currentMonth)! - 1)"
+        electricMonthTextField.text = "\(Int(currentMonth)! - 1) - \(Int(currentMonth)!)"
     }
 
 }

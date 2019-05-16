@@ -9,7 +9,7 @@
 import UIKit
 
 class CalculatorMoneyModel: NSObject {
-    var electricMonth: Int = 0
+    var electricMonth: String = ""
     var houseMonth: Int = 0
     var networkMoney: Int = 0
     var waterMoney: Int = 0

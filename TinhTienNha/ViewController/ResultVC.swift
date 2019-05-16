@@ -33,6 +33,14 @@ class ResultVC: UIViewController {
     @IBOutlet weak var totalPersonLabel: UILabel!
     @IBOutlet weak var electricWaterPerPersonLabel: UILabel!
     
+    // air condition electric
+    @IBOutlet weak var kwTotalNumber: UILabel!
+    @IBOutlet weak var kwAirOld: UILabel!
+    @IBOutlet weak var kwAirNew: UILabel!
+    @IBOutlet weak var kwAirPercent: UILabel!
+    @IBOutlet weak var kwAirMoney: UILabel!
+    @IBOutlet weak var airConditionMoney: UILabel!
+    
     // MARK: - Custom Properties
     public var calculateModel: CalculatorMoneyModel!
     
@@ -67,9 +75,26 @@ class ResultVC: UIViewController {
                                            endColor: UIColor.hexStringToUIColor("#E6C4E7"))
         self.view.layer.insertSublayer(gradient, at: 0)
         
-        // ===== Real data        
+        // ===== Real data
+        // Air condition
+        if calculateModel.electricAirNew <= 0 || calculateModel.electricAirOld <= 0 ||
+            calculateModel.electricTotal <= 0 {
+            return
+        }
+        
+        let airKwNum = Double(calculateModel.electricAirNew - calculateModel.electricAirOld)
+        let airPercentTotal = airKwNum/Double(calculateModel.electricTotal)
+        let airMoneyTotal = Double(calculateModel.electricMoney) * airPercentTotal
+        kwTotalNumber.text = "\(calculateModel.electricTotal) kw"
+        kwAirOld.text = "\(calculateModel.electricAirOld) kw"
+        kwAirNew.text = "\(calculateModel.electricAirNew) kw"
+        kwAirPercent.text = String(format: "%.0f kw (%.2f%%)", airKwNum, airPercentTotal * 100)
+        kwAirMoney.text = "\(formatNumberToMoney(Int(airMoneyTotal)))"
+        airConditionMoney.text = kwAirMoney.text
+        
             // common
-        let total = calculateModel.networkMoney  + calculateModel.waterMoney + calculateModel.electricMoney
+        let total = calculateModel.networkMoney  + calculateModel.waterMoney +
+                    calculateModel.electricMoney - Int(airMoneyTotal)
         let totalPerson = NUMBER_PERSON_HOST + calculateModel.huongMemberCount + calculateModel.hoangAnhMemberCount
         let electricWaterPerPerson = total / totalPerson
         
@@ -86,7 +111,7 @@ class ResultVC: UIViewController {
             // c Huong
         let huongMonth = (MONEY_PER_MONTH +
                             (calculateModel.huongMemberCount * electricWaterPerPerson) +
-                            calculateModel.huongMoreMoney)
+                            calculateModel.huongMoreMoney) + Int(airMoneyTotal)
         var huongMore = ""
         if calculateModel.huongMoreMoney != 0 {
             if calculateModel.huongMoreMoney > 0 {
@@ -96,7 +121,8 @@ class ResultVC: UIViewController {
             }
         }
         huongLabel.text = "(" + formatNumberToMoney(electricWaterPerPerson) +
-                            " * \(calculateModel.huongMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH))" +
+                            " * \(calculateModel.huongMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH)) + " +
+                            "\(formatNumberToMoney(Int(airMoneyTotal)))" +
                             huongMore + " = " + formatNumberToMoney(huongMonth)
         huongNote.text = calculateModel.huongNote
         
@@ -117,8 +143,6 @@ class ResultVC: UIViewController {
                                 haMore +
                                 " = " + formatNumberToMoney(haMonth)
         hoangAnhNote.text = calculateModel.hoangAnhNote
-        
-        
     }
     
     private func formatNumberToMoney(_ money: Int) -> String {
