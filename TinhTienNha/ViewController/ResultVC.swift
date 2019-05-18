@@ -77,8 +77,7 @@ class ResultVC: UIViewController {
         
         // ===== Real data
         // Air condition
-        if calculateModel.electricAirNew <= 0 || calculateModel.electricAirOld <= 0 ||
-            calculateModel.electricTotal <= 0 {
+        if calculateModel.electricAirNew <= 0 || calculateModel.electricTotal <= 0 {
             return
         }
         
