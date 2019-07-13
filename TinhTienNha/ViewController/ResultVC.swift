@@ -9,7 +9,6 @@
 import UIKit
 
 let MONEY_PER_MONTH = 1200000
-let NUMBER_PERSON_HOST = 3 // Anh - Giang - Ngan
 
 enum SegmentTab {
     case tabLeft
@@ -87,14 +86,14 @@ class ResultVC: UIViewController {
         kwTotalNumber.text = "\(calculateModel.electricTotal) kw"
         kwAirOld.text = "\(calculateModel.electricAirOld) kw"
         kwAirNew.text = "\(calculateModel.electricAirNew) kw"
-        kwAirPercent.text = String(format: "%.0f kw (%.2f%%)", airKwNum, airPercentTotal * 100)
+        kwAirPercent.text = String(format: "(%.2f%%) %.0f kw", airPercentTotal * 100, airKwNum)
         kwAirMoney.text = "\(formatNumberToMoney(Int(airMoneyTotal)))"
         airConditionMoney.text = kwAirMoney.text
         
             // common
         let total = calculateModel.networkMoney  + calculateModel.waterMoney +
                     calculateModel.electricMoney - Int(airMoneyTotal)
-        let totalPerson = NUMBER_PERSON_HOST + calculateModel.huongMemberCount + calculateModel.hoangAnhMemberCount
+        let totalPerson = calculateModel.meMemberCount + calculateModel.huongMemberCount + calculateModel.hoangAnhMemberCount
         let electricWaterPerPerson = total / totalPerson
         
         totalPersonLabel.text = "\(totalPerson)"

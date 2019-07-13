@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var huongMoreButton: UIButton!
     @IBOutlet weak var huongNoteTextView: UITextView!
     @IBOutlet weak var haNoteTextView: UITextView!
+    @IBOutlet weak var meCountTextField: UITextField!
     @IBOutlet weak var commonNoteTextView: UITextView!
     
     // new electric
@@ -63,6 +64,7 @@ class ViewController: UIViewController {
         param.electricAirOld = Int(electricAirConditionOldTextField.text!) ?? 0
         param.electricAirNew = Int(electricAirConditionNewTextField.text!) ?? 0
         param.electricTotal = Int(electricTotalTextField.text!) ?? 0
+        param.meMemberCount = Int(meCountTextField.text!) ?? 0
         
         var huongMore = Int(huongMoreTextField.text!) ?? 0
         if !huongMoreButton.isSelected {
