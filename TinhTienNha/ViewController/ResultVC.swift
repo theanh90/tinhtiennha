@@ -9,7 +9,7 @@
 import UIKit
 
 let MONEY_PER_MONTH = 1200000
-let NUMBER_PERSON_HOST = 3 // Anh - Giang - Ngan
+let NUMBER_PERSON_HOST = 4 // Anh - Giang - Ngan - Xu`
 
 enum SegmentTab {
     case tabLeft
@@ -75,7 +75,7 @@ class ResultVC: UIViewController {
         
         totalPersonLabel.text = "\(totalPerson)"
         electricWaterPerPersonLabel.text = formatNumberToMoney(total) + " / \(totalPerson) = " + formatNumberToMoney(electricWaterPerPerson)
-        electricMonthLabel.text = "Tiền điện nước tháng \(calculateModel.electricMonth)"
+        electricMonthLabel.text = String.init(format: "Tiền điện nước tháng %li - %li", calculateModel.electricMonth, calculateModel.electricMonth+1)
         houseMonthLabel.text = "Tiền nhà tháng \(calculateModel.houseMonth)"
         networkMoney.text = formatNumberToMoney(calculateModel.networkMoney)
         waterMoney.text = formatNumberToMoney(calculateModel.waterMoney)
@@ -95,9 +95,14 @@ class ResultVC: UIViewController {
                 huongMore = " - \(formatNumberToMoney(abs(calculateModel.huongMoreMoney))) "
             }
         }
-        huongLabel.text = "(" + formatNumberToMoney(electricWaterPerPerson) +
-                            " * \(calculateModel.huongMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH))" +
-                            huongMore + " = " + formatNumberToMoney(huongMonth)
+        
+        if calculateModel.huongMemberCount == 0 {
+            huongLabel.text = ""
+        } else {
+            huongLabel.text = "(" + formatNumberToMoney(electricWaterPerPerson) +
+                                " * \(calculateModel.huongMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH))" +
+                                huongMore + " = " + formatNumberToMoney(huongMonth)
+        }
         huongNote.text = calculateModel.huongNote
         
             // a Hoang Anh
@@ -112,10 +117,15 @@ class ResultVC: UIViewController {
                 haMore = " - \(formatNumberToMoney(abs(calculateModel.hoangAnhMoreMoney))) "
             }
         }
-        hoangAnhLabel.text = "(" + formatNumberToMoney(electricWaterPerPerson) +
-                                " * \(calculateModel.hoangAnhMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH))" +
-                                haMore +
-                                " = " + formatNumberToMoney(haMonth)
+        
+        if calculateModel.hoangAnhMemberCount == 0 {
+           hoangAnhLabel.text = ""
+        } else {
+            hoangAnhLabel.text = "(" + formatNumberToMoney(electricWaterPerPerson) +
+                                    " * \(calculateModel.hoangAnhMemberCount)) + \(formatNumberToMoney(MONEY_PER_MONTH))" +
+                                    haMore +
+                                    " = " + formatNumberToMoney(haMonth)
+        }
         hoangAnhNote.text = calculateModel.hoangAnhNote
         
         
